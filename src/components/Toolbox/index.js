@@ -56,7 +56,7 @@ export const Toolbox = () => {
         <div className={styles.toolItem}>
           <h4 className={styles.toolLabel}>Brush Size</h4>
           <div className={styles.itemContainer}>
-            <input type="range" min={1} max={10} step={1} onChange={handleBrushSize} />
+            <input type="range" min={1} max={50} step={1} onChange={handleBrushSize} value={size} />
           </div>
         </div>
       )}
