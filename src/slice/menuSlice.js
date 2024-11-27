@@ -4,6 +4,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
   activeMenuItem: MENU_ITEMS.PENCIL,
+  actionMenuItem: null,
 };
 
 export const menuSlice = createSlice({
