@@ -1,19 +1,19 @@
 .menuContainer {
   @apply px-5 py-1 flex justify-between w-1/4 left-1/2 top-10 rounded-md;
-  border: 1px solid theme("colors.border1");
+  border: 1px solid theme('colors.border1');
   position: absolute;
   transform: translateX(-50%);
-  box-shadow: theme("colors.shadow1");
-  background-color: theme("colors.background");
+  box-shadow: theme('colors.shadow1');
+  background-color: theme('colors.background1');
 
   .iconWrapper {
     @apply cursor-pointer flex justify-center items-center rounded-md h-10 w-10;
     &:hover,
     &.active {
-      background-color: theme("colors.hover");
+      background-color: theme('colors.hover');
     }
     .icon {
-      color: theme("colors.text1");
+      color: theme('colors.text1');
       font-size: 20px;
     }
   }

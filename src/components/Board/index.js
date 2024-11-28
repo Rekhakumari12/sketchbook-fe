@@ -41,12 +41,21 @@ export const Board = () => {
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
-    const changeConfig = () => {
+    const changeConfig = (color, size) => {
       context.strokeStyle = color
       context.lineWidth = size
     }
+    const handleChangeConfig = (config) => {
+      changeConfig(config.color, config.size)
+    }
 
-    changeConfig()
+    changeConfig(color, size)
+
+    socket.on('changeConfig', handleChangeConfig)
+
+    return () => {
+      socket.off('changeConfig', handleChangeConfig)
+    }
   }, [color, size])
 
   //reserved useLayoutEffect for canvas update (on before browser paint)
@@ -68,34 +77,46 @@ export const Board = () => {
       context.stroke()
     }
 
-    const handleMouseDown = (e) => {
-      shouldDraw.current = true
-      beginPath(e.clientX, e.clientY)
-    }
-
     const handleMouseUp = () => {
       shouldDraw.current = false
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
       drawHistory.current.push(imageData)
       historyPointer.current = drawHistory.current.length - 1
     }
+
+    const handleMouseDown = (e) => {
+      shouldDraw.current = true
+      beginPath(e.clientX, e.clientY)
+      socket.emit('beginPath', { x: e.clientX, y: e.clientY })
+    }
+
     const handleMouseMove = (e) => {
       if (!shouldDraw.current) return
       drawLine(e.clientX, e.clientY)
+      socket.emit('drawLine', { x: e.clientX, y: e.clientY })
+    }
+
+    const handleBeginPath = (path) => {
+      beginPath(path.x, path.y)
+    }
+
+    const handleDrawLine = (path) => {
+      drawLine(path.x, path.y)
     }
 
     canvas.addEventListener('mousedown', handleMouseDown)
     canvas.addEventListener('mouseup', handleMouseUp)
     canvas.addEventListener('mousemove', handleMouseMove)
 
-    socket.on('connect', () => {
-      console.log('client connected')
-    })
+    socket.on('beginPath', handleBeginPath)
+    socket.on('drawLine', handleDrawLine)
 
     return () => {
       canvas.removeEventListener('mousedown', handleMouseDown)
       canvas.removeEventListener('mouseup', handleMouseUp)
       canvas.removeEventListener('mousemove', handleMouseMove)
+      socket.off('beginPath', handleBeginPath)
+      socket.off('drawLine', handleDrawLine)
     }
   }, [])
 
