@@ -1,21 +1,21 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faEraser, faFileArrowDown, faRotateLeft, faRotateRight } from "@fortawesome/free-solid-svg-icons";
-import styles from "./index.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { MENU_ITEMS } from "@/constants";
-import { menuItemClick, actionItemClick } from "@/slice/menuSlice";
-import cx from "classnames";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil, faEraser, faFileArrowDown, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons'
+import styles from './index.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { MENU_ITEMS } from '@/constants'
+import { menuItemClick, actionItemClick } from '@/slice/menuSlice'
+import cx from 'classnames'
 
 export const Menu = () => {
-  const dispatch = useDispatch();
-  const { activeMenuItem } = useSelector((state) => state.menu);
+  const dispatch = useDispatch()
+  const { activeMenuItem } = useSelector((state) => state.menu)
   const handleClick = (itemName) => {
-    dispatch(menuItemClick(itemName));
-  };
+    dispatch(menuItemClick(itemName))
+  }
 
   const handleActionItemClick = (itemName) => {
-    dispatch(actionItemClick(itemName));
-  };
+    dispatch(actionItemClick(itemName))
+  }
 
   return (
     <div className={styles.menuContainer}>
@@ -35,15 +35,15 @@ export const Menu = () => {
       </button>
       {/* action menu items */}
 
-      <button className={styles.iconWrapper} onClick={(e) => handleActionItemClick(MENU_ITEMS.REDO)}>
+      <button className={styles.iconWrapper} onClick={(e) => handleActionItemClick(MENU_ITEMS.UNDO)}>
         <FontAwesomeIcon icon={faRotateLeft} className={styles.icon} />
       </button>
-      <button className={styles.iconWrapper} onClick={(e) => handleActionItemClick(MENU_ITEMS.UNDO)}>
+      <button className={styles.iconWrapper} onClick={(e) => handleActionItemClick(MENU_ITEMS.REDO)}>
         <FontAwesomeIcon icon={faRotateRight} className={styles.icon} />
       </button>
       <button className={styles.iconWrapper} onClick={(e) => handleActionItemClick(MENU_ITEMS.DOWNLOAD)}>
         <FontAwesomeIcon icon={faFileArrowDown} className={styles.icon} />
       </button>
     </div>
-  );
-};
+  )
+}

@@ -6,10 +6,13 @@ import { actionItemClick } from '@/slice/menuSlice'
 export const Board = () => {
   const canvasRef = useRef(null)
   const shouldDraw = useRef(false)
+  const drawHistory = useRef([])
+  const historyPointer = useRef(0)
   const dispatch = useDispatch()
   const { activeMenuItem, actionMenuItem } = useSelector((state) => state.menu)
   const { color, size } = useSelector((state) => state.toolbox[activeMenuItem])
 
+  // action(undo, redo, download) functionality
   useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
@@ -21,11 +24,17 @@ export const Board = () => {
       anchor.href = URl
       anchor.download = 'sketch.jpg'
       anchor.click()
+    } else if (actionMenuItem === MENU_ITEMS.UNDO || actionMenuItem === MENU_ITEMS.REDO) {
+      if (historyPointer.current > 0 && actionMenuItem === MENU_ITEMS.UNDO) historyPointer.current -= 1
+      if (historyPointer.current < drawHistory.current.length - 1 && actionMenuItem === MENU_ITEMS.REDO) historyPointer.current += 1
+      const imageData = drawHistory.current[historyPointer.current]
+      context.putImageData(imageData, 0, 0) // get image data and draw on canvas
     }
 
     dispatch(actionItemClick(null))
   }, [actionMenuItem, dispatch])
 
+  // to setup color and size
   useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
@@ -62,8 +71,12 @@ export const Board = () => {
       shouldDraw.current = true
       beginPath(e.clientX, e.clientY)
     }
+
     const handleMouseUp = () => {
       shouldDraw.current = false
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+      drawHistory.current.push(imageData)
+      historyPointer.current = drawHistory.current.length - 1
     }
     const handleMouseMove = (e) => {
       if (!shouldDraw.current) return
