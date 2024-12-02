@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
 
 ## Getting Started
 
@@ -14,27 +14,38 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Project Description: Collaborative Online Drawing Application  
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This project is an **interactive and feature-rich sketching/drawing application** designed to provide a seamless and intuitive digital canvas for users. It offers a range of tools and functionalities to enhance creativity and collaboration, making it suitable for artists, designers, and anyone who enjoys sketching or digital artwork.  
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Key Features:  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+1. **Interactive Canvas**:  
+   - Users can draw on a digital canvas with smooth and precise rendering of brush strokes.  
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Brush Customization**:  
+   - Tools to adjust brush size and change brush colors, providing flexibility for various artistic styles.  
 
-## Learn More
+3. **Erase Functionality**:  
+   - A dedicated eraser tool allows users to remove unwanted elements from their drawings.  
 
-To learn more about Next.js, take a look at the following resources:
+4. **Undo/Redo Options**:  
+   - Enables users to revert or reapply changes, ensuring creative freedom without fear of mistakes.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+5. **Real-Time Updates**:  
+   - Collaborate effectively with real-time synchronization of changes across multiple tabs or users.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. **Seamless Syncing with Socket.IO**:  
+   - Utilizes **Socket.IO** for robust and efficient syncing of drawing actions, ensuring a smooth collaborative experience.  
 
-## Deploy on Vercel
+7. **Download Artwork**:  
+   - Provides functionality to save completed artwork in high-quality **JPEG format**, allowing users to keep or share their creations.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Technical Stack:  
+- **Frontend**: HTML5 Canvas API, Next.js, Redux Toolkit and Tailwind CSS for rendering the drawing interface and tools.  
+- **Backend**: Node.js, Express.js and **Socket.IO** for real-time communication and state management.  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+
+## Deployed on Vercel
+
+Check out it live  (https://sketchbook-fe-pi.vercel.app/).
